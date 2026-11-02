@@ -77,15 +77,31 @@
 
     </div>
 
-    <script src="./resources/js/main.js"></script>
     <script>
-        // Compte à rebours jusqu'à l'anniversaire de Flore (12 novembre)
-        function updateFloreBirthday() {
+        // Compte à rebours de Noël (25 décembre, minuit)
+        function updateChristmas() {
+            var now = new Date();
+            var noel = new Date(now.getFullYear(), 11, 25, 0, 0, 0);
+
+            if (noel < now) {
+                noel.setFullYear(now.getFullYear() + 1);
+            }
+
+            var diff = noel - now;
+            var clock = document.getElementById('clockdiv');
+
+            clock.querySelector('.days').textContent = Math.floor(diff / (1000 * 60 * 60 * 24));
+            clock.querySelector('.hours').textContent = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            clock.querySelector('.minutes').textContent = Math.floor((diff / (1000 * 60)) % 60);
+            clock.querySelector('.seconds').textContent = Math.floor((diff / 1000) % 60);
+        }
+
+        // Compte à rebours de l'anniversaire de Flore (12 novembre)
+        function updateFlore() {
             var now = new Date();
             var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
             var birthday = new Date(now.getFullYear(), 10, 12); // 10 = novembre (janvier = 0)
 
-            // Si la date est déjà passée cette année, on prend l'année suivante
             if (birthday < today) {
                 birthday.setFullYear(now.getFullYear() + 1);
             }
@@ -94,8 +110,13 @@
             document.getElementById('flore-days').textContent = days;
         }
 
-        updateFloreBirthday();
-        setInterval(updateFloreBirthday, 60000);
+        function update() {
+            updateChristmas();
+            updateFlore();
+        }
+
+        update();
+        setInterval(update, 1000);
     </script>
 </body>
 </html>
