@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
       <meta charset="utf-8">
-      <title>Christmas Counter</title>
+      <title>Compte à rebours de Noël</title>
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <!-- CSS LINKS -->
       <link href="resources/css/reset.css" rel="stylesheet" type="text/css">
@@ -11,12 +11,12 @@
       <link href="https://fonts.googleapis.com/css?family=Amatic+SC|Tangerine" rel="stylesheet">
       <!-- META TAGS -->
       <meta name="author" content="Alexander Wilson van Deurs">
-      
+
       <!-- JS FILES -->
       <script src="./resources/js/snowstorm-min.js"></script>
-      
+
       <style>
-        /* Center and lower the wedding countdown text */
+        /* Centre et abaisse le texte du bas */
         .bottom .side-note {
             position: absolute;
             left: 50%;
@@ -30,59 +30,72 @@
             margin: 5px 0;
         }
       </style>
-    </head>
-    <body>
-        <div class="container">
-            
-            <div class="top section">
-                <div class="top-left thing"></div>
-                <header>
-                    <h1>Compte à rebours de Noël</h1>
-                </header>
-                <div class="top-right thing"></div>
-            </div>
-            
-            <div class="mid section">
-                <div class="main-counter" id="clockdiv">
-                    <div class="counter">
-                        <h2 class="days"></h2>
-                        <h2>dodos</h2>
-                    </div>
-                    <div class="counter">
-                        <h2 class="hours"></h2>
-                        <h2>heures</h2>
-                    </div>
-                     <div class="counter">
-                        <h2 class="minutes"></h2>
-                        <h2>minutes</h2>
-                    </div>
-                    <div class="counter">
-                        <h2 class="seconds"></h2>
-                        <h2>secondes</h2>
-                    </div>
-                </div>
-                <div class="side-note">
-                    <h4>Jusqu'à l'arrivée du <span id="santa">Père Noël</span></h4>
-                </div>
-            </div>
-            
-            <div class="bottom section">
-                <div class="side-note">
-                    <h4 class="days"> </h4>
-                    <h4 class="days"> </h4>
-                    <h4 class="days"> </h4>
-            <div class="bottom section">
-            </div>
-                    <div class="main-counter" id="clockdiv">
-                    <div class="counter">
-                        <h2 class="days"></h2>
-                        <h2>dodos</h2> jusqu'à l'anniversaire de <span id="santa">Flore !</span>
-                    </div>
-                </div>
-            </div>
-        
+  </head>
+  <body>
+    <div class="container">
+
+        <div class="top section">
+            <div class="top-left thing"></div>
+            <header>
+                <h1>Compte à rebours de Noël</h1>
+            </header>
+            <div class="top-right thing"></div>
         </div>
 
-        <script src="./resources/js/main.js"></script>
-    </body>
+        <div class="mid section">
+            <div class="main-counter" id="clockdiv">
+                <div class="counter">
+                    <h2 class="days"></h2>
+                    <h2>dodos</h2>
+                </div>
+                <div class="counter">
+                    <h2 class="hours"></h2>
+                    <h2>heures</h2>
+                </div>
+                <div class="counter">
+                    <h2 class="minutes"></h2>
+                    <h2>minutes</h2>
+                </div>
+                <div class="counter">
+                    <h2 class="seconds"></h2>
+                    <h2>secondes</h2>
+                </div>
+            </div>
+            <div class="side-note">
+                <h4>Jusqu'à l'arrivée du <span id="santa">Père Noël</span></h4>
+            </div>
+        </div>
+
+        <div class="bottom section">
+            <div class="side-note">
+                <h4>
+                    <span id="flore-days"></span> dodos jusqu'à l'anniversaire de
+                    <span id="flore">Flore !</span>
+                </h4>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="./resources/js/main.js"></script>
+    <script>
+        // Compte à rebours jusqu'à l'anniversaire de Flore
+        // ⚠️ Remplace le mois et le jour par la vraie date (ici : 15 décembre)
+        function updateFloreBirthday() {
+            var now = new Date();
+            var birthday = new Date(now.getFullYear(), 11, 15); // mois : 0 = janvier, 11 = décembre
+
+            // Si la date est déjà passée cette année, on prend l'année suivante
+            if (birthday < now) {
+                birthday.setFullYear(now.getFullYear() + 1);
+            }
+
+            var days = Math.ceil((birthday - now) / (1000 * 60 * 60 * 24));
+            document.getElementById('flore-days').textContent = days;
+        }
+
+        updateFloreBirthday();
+        setInterval(updateFloreBirthday, 60000);
+    </script>
+</body>
 </html>
